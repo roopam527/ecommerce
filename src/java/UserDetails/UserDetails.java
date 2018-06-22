@@ -5,7 +5,7 @@ import javax.servlet.annotation.*;
 @WebServlet(urlPatterns ={"/UserDetails"})
 public class UserDetails{
 String userName;
-String userEmail;
+public String userEmail;
 String userStatus;
 String userPassword;
 String userAddress;

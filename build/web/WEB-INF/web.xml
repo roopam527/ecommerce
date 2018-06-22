@@ -12,6 +12,10 @@
         <servlet-name>UpdateValues</servlet-name>
         <servlet-class>process.UpdateValues</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>deleteServlet</servlet-name>
+        <servlet-class>process.deleteServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
@@ -23,6 +27,10 @@
     <servlet-mapping>
         <servlet-name>UpdateValues</servlet-name>
         <url-pattern>/UpdateValues</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteServlet</servlet-name>
+        <url-pattern>/deleteServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

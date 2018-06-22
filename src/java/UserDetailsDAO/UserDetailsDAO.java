@@ -15,6 +15,7 @@ public interface UserDetailsDAO {
         public UserDetails getUserByIndex(int index);
         public boolean updateUser(UserDetails userDetails);
         public boolean changeStatus(UserDetails userDetails);
+        
 }
 
     

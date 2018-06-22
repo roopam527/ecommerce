@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author dotnet1
  */
-public class UpdateValues extends HttpServlet {
+public class deleteServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,27 +37,23 @@ public class UpdateValues extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
+             PrintWriter out = response.getWriter();
             /* TODO output your page here. You may use following sample code. */
-            PrintWriter out = response.getWriter();
-            int index= Integer.parseInt(request.getParameter("cid"));
-            UserDetailsDAO userDetailsDAO = new  UserDetailsImpl();
-             UserDetails list = userDetailsDAO.getUserByIndex(index);
-             
-             list.setUserEmail(request.getParameter("email"));
-             list.setUserName(request.getParameter("name"));
-             list.setUserAddress(request.getParameter("address"));
-             list.setUserPassword(request.getParameter("password"));
-             list.setUserMobile(request.getParameter("mobile"));
-             
-  //       PrintWriter out = response.getPrintWriter();
-              
+             int index= Integer.parseInt(request.getParameter("cid"));
+             UserDetailsDAO userDetailsDAO = new  UserDetailsImpl();
+           UserDetails list = userDetailsDAO.getUserByIndex(index);
+            userDetailsDAO.deleteUser(list);
+                  
+            
+            
          RequestDispatcher rd ;
-         
          rd = request.getRequestDispatcher("register.html");
          rd.include(request, response);
          
          
-            List <UserDetails>ulist   = userDetailsDAO.getAllUser();
+         
+         
+           List <UserDetails>ulist   = userDetailsDAO.getAllUser();
             
             Iterator item=ulist.iterator();
             
@@ -102,7 +98,9 @@ public class UpdateValues extends HttpServlet {
                 out.println("<td>   <a href='"+url+"'> Edit  </a> </td>");
                 
                 
-                out.println("<td>   <a href='deleteServelt?cid='"+i+"> Delete  </a> </td>");
+                             
+                 String urldelete ="deleteServlet?cid="+i;
+                out.println("<td>   <a href='"+urldelete+"'> Delete  </a> </td>");
                 
                 i++;
                 out.println("</tr>");
@@ -116,8 +114,7 @@ public class UpdateValues extends HttpServlet {
             
             
         }catch(Exception e){
-               PrintWriter out = response.getWriter();
-               out.println(e.getMessage());
+            
         }
     }
 

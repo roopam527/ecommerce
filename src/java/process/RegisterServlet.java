@@ -37,17 +37,13 @@ public class RegisterServlet extends HttpServlet {
         System.out.println(" ****************************");
         System.out.println(" ****************************");
         System.out.println(" ****************************");
+        System.out.println(" niit process ");
+        System.out.println(" ****************************");
+        System.out.println(" ****************************");
+        System.out.println(" ****************************");
         
-                System.out.println(" niit process ");
-                        System.out.println(" ****************************");
-
-                                System.out.println(" ****************************");
-
-                                        System.out.println(" ****************************");
-
-
-
-                 
+        
+        
         String strMobile;
         String strPassword; 
         String strName;
@@ -142,8 +138,8 @@ public class RegisterServlet extends HttpServlet {
                 
                 out.println("<td>   <a href='"+url+"'> Edit  </a> </td>");
                 
-                
-                out.println("<td>   <a href='deleteServelt?cid='"+i+"> Delete  </a> </td>");
+                 String urldelete ="deleteServlet?cid="+i;
+                out.println("<td>   <a href='"+urldelete+"'> Delete  </a> </td>");
                 
                 i++;
                 out.println("</tr>");
