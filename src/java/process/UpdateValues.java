@@ -1,4 +1,8 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package process;
 
 import UserDetails.UserDetails;
@@ -13,13 +17,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import static sun.org.mozilla.javascript.internal.ScriptRuntime.name;
 
 /**
  *
  * @author dotnet1
  */
-public class RegisterServlet extends HttpServlet {
+public class UpdateValues extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,70 +36,29 @@ public class RegisterServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-    
-        System.out.println(" ****************************");
-        System.out.println(" ****************************");
-        System.out.println(" ****************************");
-        
-                System.out.println(" niit process ");
-                        System.out.println(" ****************************");
-
-                                System.out.println(" ****************************");
-
-                                        System.out.println(" ****************************");
-
-
-
-                 
-        String strMobile;
-        String strPassword; 
-        String strName;
-        String strAddress;
-        String  strEmail =null;
-        PrintWriter out=null;
-         
-        try 
-        {
-            
-            out = response.getWriter();
-            
-      
-           strMobile = request.getParameter("usermobile"); 
-           strEmail = request.getParameter("email");
-           strPassword = request.getParameter("pwd");
-           strName = request.getParameter("username");
-           strAddress = request.getParameter("useraddress");
-           
-            
-             
-             
-            
-            UserDetails user = new UserDetails();
-            user.setUserEmail(strEmail);
-            user.setUserAddress(strAddress);
-            user.setUserMobile(strMobile);
-            user.setUserPassword(strPassword);
-            user.setUserName(strName);
-            
+        try {
+            /* TODO output your page here. You may use following sample code. */
+            PrintWriter out = response.getWriter();
+            int index= Integer.parseInt(request.getParameter("cid"));
             UserDetailsDAO userDetailsDAO = new  UserDetailsImpl();
-            userDetailsDAO.addUser(user);
-      
-           
-            
+             UserDetails list = userDetailsDAO.getUserByIndex(index);
+             
+             list.setUserEmail(request.getParameter("email"));
+             list.setUserName(request.getParameter("name"));
+             list.setUserAddress(request.getParameter("address"));
+             list.setUserPassword(request.getParameter("password"));
+             list.setUserMobile(request.getParameter("mobile"));
+             
+  //       PrintWriter out = response.getPrintWriter();
+              
          RequestDispatcher rd ;
          
          rd = request.getRequestDispatcher("register.html");
          rd.include(request, response);
          
-         
-         
-            
-         
-            
-            
-            
-            
-            
+           
+          
+           
             
             List <UserDetails>ulist   = userDetailsDAO.getAllUser();
             
@@ -156,18 +118,21 @@ public class RegisterServlet extends HttpServlet {
             out.println("</div>");
             
             
-            
-                    
-               
+        }catch(Exception e){
+               PrintWriter out = response.getWriter();
+               out.println(e.getMessage());
         }
-        catch(Exception e)
-        {
-            
-        }
-        
     }
 
-    
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -197,9 +162,5 @@ public class RegisterServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-    private UserDetailsDAO UserDetailsImpl() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
 }

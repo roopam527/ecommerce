@@ -4,9 +4,25 @@
         <servlet-name>RegisterServlet</servlet-name>
         <servlet-class>process.RegisterServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>editServelt</servlet-name>
+        <servlet-class>process.editServelt</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateValues</servlet-name>
+        <servlet-class>process.UpdateValues</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
         <url-pattern>/RegisterServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>editServelt</servlet-name>
+        <url-pattern>/editServelt</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateValues</servlet-name>
+        <url-pattern>/UpdateValues</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

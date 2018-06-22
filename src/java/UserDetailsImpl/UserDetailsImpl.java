@@ -44,6 +44,16 @@ public class UserDetailsImpl  implements UserDetailsDAO
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    
+    public UserDetails getUserByIndex(int index)
+    {
+        
+        UserDetails curlist = list.get(index);
+        
+        return curlist;
+     }
+    
+    
     @Override
     public boolean updateUser(UserDetails userDetails) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.

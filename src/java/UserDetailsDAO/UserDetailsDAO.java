@@ -12,6 +12,7 @@ public interface UserDetailsDAO {
         public boolean deleteUser(UserDetails userDetails);
         public List<UserDetails> getAllUser();
         public UserDetails getUserByEmail(String email);
+        public UserDetails getUserByIndex(int index);
         public boolean updateUser(UserDetails userDetails);
         public boolean changeStatus(UserDetails userDetails);
 }
