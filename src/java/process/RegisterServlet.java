@@ -6,6 +6,10 @@ import UserDetailsDAO.UserDetailsDAO;
 import UserDetailsImpl.UserDetailsImpl;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Iterator;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
@@ -13,7 +17,6 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import static sun.org.mozilla.javascript.internal.ScriptRuntime.name;
 
 /**
  *
@@ -84,15 +87,6 @@ public class RegisterServlet extends HttpServlet {
          rd = request.getRequestDispatcher("register.html");
          rd.include(request, response);
          
-         
-         
-            
-         
-            
-            
-            
-            
-            
             
             List <UserDetails>ulist   = userDetailsDAO.getAllUser();
             

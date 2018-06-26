@@ -1,5 +1,5 @@
 package UserDetailsImpl;
-import UserDetails.UserDetails;
+import DbConfig.MyConnection;
 import java.util.List;
 import UserDetailsDAO.UserDetailsDAO;
 import UserDetails.UserDetails;
@@ -33,35 +33,40 @@ public class UserDetailsImpl  implements UserDetailsDAO
     @Override
     public boolean addUser(UserDetails userDetails) {
         
-   
+       
         
         
-        
-        
-        
-        
-        
-        list.add(userDetails);
+      
         
         try
         {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-            con = DriverManager.getConnection("jdbc:derby://localhost:1527/EommerceDB","user1","admin");
-            st = con.createStatement();
+            con=MyConnection.getCon();
+             st = con.createStatement();
             
-            String str = "insert into users"
-                    + "(useremail,username,userstatus,"
-                    + "userpassword,useraddress,usermobile"
-                    + ",userrole) "
-                    + "values( '"+userDetails.getUserEmail()+","
-                    +userDetails.getUserName()+","
-                    +userDetails.getUserStatus()+","
-                    +userDetails.getUserPassword()+","
-                    +userDetails.getUserAddress()+","
-                    +userDetails.getUserMobile()+","+userDetails.getUserRole()+"')";
+            String str = "insert into users(useremail,username,userstatus,userpassword,useraddress,usermobile)"
+                         + " values('"+userDetails.getUserEmail()+"','"+userDetails.getUserName()+"','"+userDetails.getUserStatus()+"','"+userDetails.getUserPassword()+"','"+userDetails.getUserAddress()+"','"+userDetails.getUserMobile()+"')";
+           
+                    
+                    
+                    
             
-            st.executeQuery(str);
+            System.out.println("**********************");
             
+            
+            System.out.println("**********************");
+            System.out.println("QUERY");
+          
+            
+            System.out.println("str = " + str);
+            
+            System.out.println("**********************");
+            System.out.println("**********************");
+            
+            
+            
+            st.executeUpdate(str);
+            
+            con.close();
             
             
             
@@ -84,6 +89,8 @@ public class UserDetailsImpl  implements UserDetailsDAO
         
         System.out.println(" Add Method ");
         
+        
+        
         return true;
     }
 
@@ -103,8 +110,49 @@ public class UserDetailsImpl  implements UserDetailsDAO
 
     @Override
     public List<UserDetails> getAllUser() {
-        return list;
+        
+          List<UserDetails> list1 = new ArrayList<UserDetails>();
+          
+        
+        try{
+            con = null;
+        con = MyConnection.getCon();
+            st= con.createStatement();
+            rs= st.executeQuery(" select * from users");
+            
+           
+            System.out.println(" From getAllusers");
+               while (rs.next())
+               {
+                   
+                    UserDetails userDetails = new UserDetails();
+                    String userEmail = rs.getString(1);
+                    String userName = rs.getString(2);
+                     String userStatus = rs.getString(3);
+                      String userPassword = rs.getString(4);
+                      String userAddress = rs.getString(5);
+                      
+                      
+                    
+                    userDetails.setUserEmail(userEmail);
+                    userDetails.setUserName(userName);
+                     userDetails.setUserStatus(userStatus);
+                      userDetails.setUserPassword(userPassword);
+                       userDetails.setUserAddress(userAddress);
+                       
+                    list1.add(userDetails);
+               }
+               
+               
+               return list1;
+               
+        }catch(Exception e){
+       
+             return null;
+        }
+       
     }
+    
 
     @Override
     public UserDetails getUserByEmail(String email) {
